@@ -3,6 +3,7 @@ package com.virtusa.SpringSecurity.controller;
 import com.virtusa.SpringSecurity.model.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,5 +39,10 @@ public class UserController {
     public List<User> addUser(@RequestBody User user){
         users.add(user);
         return users;
+    }
+
+    @GetMapping("csrf-token")
+    public CsrfToken getCSRFToken(HttpServletRequest request){
+        return (CsrfToken) request.getAttribute("_csrf");
     }
 }
